@@ -12,8 +12,12 @@ const Navigation = ({ account, setAccount }) => {
 
     return (
         <nav>
+
             <div className='nav__brand'>
                 <h1>PharmaSync</h1>
+                <div>
+                    <img src="https://img.icons8.com/ios/50/000000/ethereum.png" alt="Ethereum" />
+                </div>
             </div>
             <input
                 type="text"
@@ -42,13 +46,13 @@ const Navigation = ({ account, setAccount }) => {
 
             <ul className='nav__links'>
                 <li>
-                    <a href='#tablets'>Tablets</a>
+                    <a href='#Tablets'>Tablets</a>
                 </li>
                 <li>
-                    <a href='#drops'>Drops</a>
+                    <a href='#Drops'>Drops</a>
                 </li>
                 <li>
-                    <a href='#kit'>Kit</a>
+                    <a href='#Kit'>Kit</a>
                 </li>
             </ul>
         </nav>

@@ -30,7 +30,7 @@ function App() {
 
     //connect to contract
     const dappazon = new ethers.Contract (
-      '0x4a679253410272dd5232b3ff7cf5dbb88f295319',
+      '0x2bdcc0de6be1f7d2ee689a0342d76f52e8efaba3',
       ABI,
       provider
     )
@@ -67,7 +67,9 @@ function App() {
           <Section title={"Kit"} items={kit} togglePop={togglePop} />
         </>
       )}
-
+      {toggle && (
+        <Product item={item} provider={provider} account={account} dappazon={dappazon} togglePop={togglePop} />
+      )}
     </div>
   );
 }
