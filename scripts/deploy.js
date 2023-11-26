@@ -6,30 +6,31 @@ const tokens = (n) => {
 }
 
 async function main() {
-  //setup accounts
+  // Setup accounts
   const [deployer] = await ethers.getSigners()
-  console.log(deployer.address)
 
-  //deploy contract
-  const PharmaSync = await hre.ethers.getContractFactory("Medicine")
-  const pharmaSync = await PharmaSync.deploy()
-  await pharmaSync.deployed()
-  console.log("PharmaSync deployed to:", pharmaSync.address)
+  // deploy
+  const Medicine = await hre.ethers.getContractFactory("Medicine")
+  const medicine = await Medicine.deploy()
+  await medicine.deployed()
+
+  console.log(`Deployed Contract at: ${medicine.address}\n`)
 
   //list items
   for (let i = 0; i < items.length; i++) {
-    const item = items[i]
-    const tx = await pharmaSync.list(
-      item.id,
-      item.name,
-      item.category,
-      item.image,
-      tokens(item.cost),
-      item.rating,
-      item.stock
+    const transaction = await medicine.connect(deployer).list(
+      items[i].id,
+      items[i].name,
+      items[i].category,
+      items[i].image,
+      tokens(items[i].price),
+      items[i].rating,
+      items[i].stock,
     )
-    await tx.wait()
-    console.log(`Item ${i + 1} listed`)
+
+    await transaction.wait()
+
+    console.log(`Listed item ${items[i].id}: ${items[i].name}`)
   }
 }
 
