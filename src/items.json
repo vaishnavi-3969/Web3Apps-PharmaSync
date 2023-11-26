@@ -56,15 +56,6 @@
     },
     {
       "id": 7,
-      "name": "Puzzle Cube",
-      "category": "toys",
-      "image": "https://placehold.co/600x400",
-      "price": "0.05",
-      "rating": 4,
-      "stock": 15
-    },
-    {
-      "id": 8,
       "name": "Digestive Health",
       "category": "Ayurvedic",
       "image": "https://placehold.co/600x400",
@@ -73,7 +64,7 @@
       "stock": 12
     },
     {
-      "id": 9,
+      "id": 8,
       "name": "First Aid Kit",
       "category": "Kit",
       "image": "https://placehold.co/600x400",
@@ -82,10 +73,10 @@
       "stock": 8
     },
     {
-      "id": 10,
+      "id": 9,
       "name": "Eye Care",
       "category": "Liquid Drops",
-      "image": "https://ipfs.io/ipfs/QmTYEboq8raiBs7GTUg2yLXB3PMz6HuBNgNfSZBx5Msztg/eye_care.jpg",
+      "image": "https://placehold.co/600x400",
       "price": "50",
       "rating": 4,
       "stock": 20
