@@ -25,9 +25,10 @@ contract Medicine {
     mapping(address => uint256) public orderCount;
     mapping(address => mapping(uint256 => Order)) public orders;
 
+    event Buy(address buyer, uint256 orderId, uint256 itemId);
     event List(string name, uint256 cost, uint256 quantity);
 
-    modifier onlyOwner () {
+    modifier onlyOwner() {
         require(msg.sender == owner);
         _;
     }
@@ -65,30 +66,38 @@ contract Medicine {
 
         //emit an event
         emit List(_name, _cost, _stock);
-
     }
 
     //buy medicine
-    function buy(uint256 _id) public payable{
+    function buy(uint256 _id) public payable {
         //fetch item
         Item memory item = items[_id];
 
+        //require enough ether to buy 1 item
+        require(msg.value >= item.cost, "Not enough ether to buy this item");
+
+        //require item is not out of stock
+        require(item.stock > 0, "Item is out of stock");
+
         //create an order
-        Order memory order = Order(
-            block.timestamp,
-            item
-        );
+        Order memory order = Order(block.timestamp, item);
 
-        //save order to chain
-
+        //save order for the user
+        orderCount[msg.sender]++; //order id
+        orders[msg.sender][orderCount[msg.sender]] = order;
 
         //substrack stock
-
+        items[_id].stock = item.stock - 1;
 
         //emit an event
+        emit Buy(msg.sender, orderCount[msg.sender], item.id);
     }
 
     //withdraw funds
+    function withdraw() public onlyOwner {
+        (bool success, ) = owner.call{value: address(this).balance}("");
+        require(success);
+    }
 }
 
 

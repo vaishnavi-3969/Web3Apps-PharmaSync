@@ -74,7 +74,7 @@ describe("Medicine", () => {
     })
   })
 
-  describe("Listing", () => {
+  describe("Buying", () => {
     let transaction;
 
     //list an item
@@ -96,14 +96,63 @@ describe("Medicine", () => {
     })
 
 
-    it("Update the contract balance", async () => {
+    it("Updates the contract balance", async () => {
       const result = await ethers.provider.getBalance(medicine.address)
       console.log(result)
       expect(result).to.equal(COST)
     })
 
+    it("Updates buyer's order count", async () => {
+      const result = await medicine.orderCount(buyer.address);
+      expect(result).to.equal(1)
+    })
+
+    it("Adds the order", async () => {
+      const order = await medicine.orders(buyer.address, 1);
+      expect(order.time).to.be.greaterThan(0);
+      expect(order.item.name).to.equal(NAME);
+    })
+
+    it("Updates the contract balance", async () => {
+      const result = await ethers.provider.getBalance(medicine.address)
+      expect(result).to.equal(COST)
+    })
+
+    it("Emits buy event", () => {
+      expect(transaction).to.emit(medicine, 'Buy')
+    })
   })
 
+  describe("Withdrawing", () => {
+    let balanceBefore
+
+    beforeEach(async () => {
+      // list medicine
+      let transaction = await medicine.connect(deployer).list(ID, NAME, CATEGORY, IMAGE, COST, RATING, STOCK)
+      await transaction.wait()
+
+      //buy medicine
+      transaction = await medicine.connect(buyer).buy(ID, { value: COST })
+      await transaction.wait()
+
+      // get deployer's balance
+      balanceBefore = await ethers.provider.getBalance(deployer.address)
+
+      //withdraw
+      transaction = await medicine.connect(deployer).withdraw()
+      await transaction.wait()
+    })
+
+    it('Updates the owner balance', async () => {
+      const balanceAfter = await ethers.provider.getBalance(deployer.address)
+      expect(balanceAfter).to.be.greaterThan(balanceBefore)
+    })
+
+    it('Updates the contract balance', async () => {
+      const result = await ethers.provider.getBalance(medicine.address)
+      expect(result).to.equal(0)
+    })
+  })
 })
 
 
