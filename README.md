@@ -1,4 +1,4 @@
-# Dappazon
+# Pharma Sync
 
 ## Technology Stack & Tools
 
