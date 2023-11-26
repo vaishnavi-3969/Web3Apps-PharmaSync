@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import { Link } from 'react-router-dom';
 
 const Navigation = ({ account, setAccount }) => {
 
@@ -13,12 +14,15 @@ const Navigation = ({ account, setAccount }) => {
     return (
         <nav>
 
-            <div className='nav__brand'>
-                <h1>PharmaSync</h1>
-                <div>
-                    <img src="https://img.icons8.com/ios/50/000000/ethereum.png" alt="Ethereum" />
+               <a className='link__header' href='/'>
+               <div className='nav__brand'>
+                    <h1>PharmaSync</h1>
+                    <div>
+                        <img src="https://img.icons8.com/ios/50/000000/ethereum.png" alt="Ethereum" />
+                    </div>
                 </div>
-            </div>
+               </a>
+
             <input
                 type="text"
                 placeholder="Search"

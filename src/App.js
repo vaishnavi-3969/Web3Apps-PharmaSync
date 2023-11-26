@@ -59,7 +59,11 @@ function App() {
   return (
     <div>
       <Navigation account={account} setAccount={setAccount} />
-      <h2>Welcome to PharmaSync</h2>
+      <div className='logo__homepage'>
+      <img className='logo__home' src="https://i.ibb.co/9bDBNT7/Pharma-Sync.png" alt="Pharma-Sync"/>
+        <h2>Welcome to PharmaSync</h2>
+      </div>
+      
       {tablets && kit && drops && (
         <>
           <Section title={"Tablets"} items={tablets} togglePop={togglePop} />
