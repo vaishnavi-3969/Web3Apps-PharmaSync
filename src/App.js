@@ -30,7 +30,7 @@ function App() {
 
     //connect to contract
     const dappazon = new ethers.Contract (
-      '0x36b58f5c1969b7b6591d752ea6f5486d069010ab',
+      '0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82',
       ABI,
       provider
     )
