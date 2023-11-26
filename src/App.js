@@ -3,19 +3,55 @@ import { ethers } from 'ethers'
 import Navigation from './components/Navigation'
 import Section from './components/Section'
 import Product from './components/Product'
-import Dappazon from './abis/Dappazon.json'
+import ABI from './abis/Medicine.json'
 import config from './config.json'
 
 function App() {
-  const [account, setAccount] = useState(null)
-
-
-  const loadBlockchainData = async () => {
-    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-    const account = ethers.utils.getAddress(accounts[0]);
-    setAccount(account);
-    console.log(account);
+  const [account, setAccount] = useState(null);
+  const [provider, setProvider] = useState(null);
+  const [dappazon, setDappazon] = useState(null)
+  const [tablets, setTablets] = useState(null);
+  const [drops, setDrops] = useState(null);
+  const [kit, setKit] = useState(null);
+  const [toggle, setToggle] = useState(false)
+  const [item, setItem] = useState({})
+  const togglePop = (item) => {
+    setItem(item)
+    toggle ? setToggle(false) : setToggle(true)
   }
+  const loadBlockchainData = async () => {
+    //connect to blockchain
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    setProvider(provider)
+
+
+    const network = await provider.getNetwork()
+    console.log(network)
+
+    //connect to contract
+    const dappazon = new ethers.Contract (
+      '0x4a679253410272dd5232b3ff7cf5dbb88f295319',
+      ABI,
+      provider
+    )
+    setDappazon(dappazon)
+    
+    const items = []
+
+    for(let i=0; i<9; i++){
+      const item = await dappazon.items(i)
+      items.push(item)
+    }
+    console.log(items)
+    const tablets = items.filter((item) => item.category === 'tablets')
+    const drops = items.filter((item) => item.category === 'drops')
+    const kit = items.filter((item) => item.category === 'kit')
+    setTablets(tablets)
+    setDrops(drops)
+    setKit(kit)
+
+  }
+
   useEffect(() => {
     loadBlockchainData()
   }, [])
@@ -24,6 +60,14 @@ function App() {
     <div>
       <Navigation account={account} setAccount={setAccount} />
       <h2>Welcome to PharmaSync</h2>
+      {tablets && kit && drops && (
+        <>
+          <Section title={"Tablets"} items={tablets} togglePop={togglePop} />
+          <Section title={"Drops"} items={drops} togglePop={togglePop} />
+          <Section title={"Kit"} items={kit} togglePop={togglePop} />
+        </>
+      )}
+
     </div>
   );
 }

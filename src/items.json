@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Paracetamol",
-      "category": "Tablet",
+      "category": "tablet",
       "image": "https://placehold.co/600x400",
       "price": "5",
       "rating": 4,
@@ -12,7 +12,7 @@
     {
       "id": 2,
       "name": "Antibiotics",
-      "category": "Cream",
+      "category": "tablets",
       "image": "https://placehold.co/600x400",
       "price": "2",
       "rating": 5,
@@ -21,7 +21,7 @@
     {
       "id": 3,
       "name": "Allergy Medication",
-      "category": "Tablets",
+      "category": "tablets",
       "image": "https://placehold.co/600x400",
       "price": "4",
       "rating": 3,
@@ -30,7 +30,7 @@
     {
       "id": 4,
       "name": "Diabetes Medication",
-      "category": "Injection",
+      "category": "tablets",
       "image": "https://placehold.co/600x400",
       "price": "700",
       "rating": 5,
@@ -39,7 +39,7 @@
     {
       "id": 5,
       "name": "Cold & Flu Relief",
-      "category": "Tablets",
+      "category": "tablets",
       "image": "https://placehold.co/600x400",
       "price": "6",
       "rating": 4,
@@ -48,7 +48,7 @@
     {
       "id": 6,
       "name": "Vitamins & Supplements",
-      "category": "Tablets",
+      "category": "tablets",
       "image": "https://placehold.co/600x400",
       "price": "10",
       "rating": 5,
@@ -57,7 +57,7 @@
     {
       "id": 7,
       "name": "Digestive Health",
-      "category": "Ayurvedic",
+      "category": "drops",
       "image": "https://placehold.co/600x400",
       "price": "3",
       "rating": 4,
@@ -66,7 +66,7 @@
     {
       "id": 8,
       "name": "First Aid Kit",
-      "category": "Kit",
+      "category": "kit",
       "image": "https://placehold.co/600x400",
       "price": "300",
       "rating": 5,
@@ -75,7 +75,7 @@
     {
       "id": 9,
       "name": "Eye Care",
-      "category": "Liquid Drops",
+      "category": "drops",
       "image": "https://placehold.co/600x400",
       "price": "50",
       "rating": 4,
