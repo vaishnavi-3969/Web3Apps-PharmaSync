@@ -63,7 +63,6 @@ function App() {
       <img className='logo__home' src="https://i.ibb.co/9bDBNT7/Pharma-Sync.png" alt="Pharma-Sync"/>
         <h2>Welcome to PharmaSync</h2>
       </div>
-      
       {tablets && kit && drops && (
         <>
           <Section title={"Tablets"} items={tablets} togglePop={togglePop} />
@@ -75,6 +74,7 @@ function App() {
         <Product item={item} provider={provider} account={account} dappazon={dappazon} togglePop={togglePop} />
       )}
     </div>
+
   );
 }
 
